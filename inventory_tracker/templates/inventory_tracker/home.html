@@ -1,0 +1,43 @@
+{% extends "inventory_tracker/base.html" %}
+
+{% load static %}
+
+{% block head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" href="{% static 'inventory_tracker/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container body-container">
+<p>Welcome, {{name}}!</p>
+<h2>Business overview</h2>
+<table class="overview-tbl">
+    <tr>
+        <td>
+            Costs for this month:
+        </td>
+        <td>
+            ${{costs}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Income for this month:
+        </td>
+        <td>
+            ${{income}}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Net profit for this month:
+        </td>
+        <td>
+            ${{profit}}
+        </td>
+    </tr>
+</table>
+</div>
+{% endblock %}

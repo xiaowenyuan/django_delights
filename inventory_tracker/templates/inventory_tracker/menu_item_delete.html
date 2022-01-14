@@ -1,0 +1,21 @@
+{% extends "inventory_tracker/base.html" %}
+ 
+{% load static %}
+
+{% block head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" href="{% static 'inventory_tracker/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container body-container">
+    <h2>Delete {{ object.menu_item_name }}?</h2>
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Confirm"/>
+</form>
+</div>
+{% endblock %}

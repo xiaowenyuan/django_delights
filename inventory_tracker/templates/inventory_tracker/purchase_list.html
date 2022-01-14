@@ -1,0 +1,40 @@
+{% extends "inventory_tracker/base.html" %}
+ 
+{% load static %}
+
+{% block head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" href="{% static 'inventory_tracker/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container body-container">
+    <h2>Purchase Log</h2>
+    {% if object_list %}
+        <table>
+            <tr class="table-heading">
+                <th>Date</th>
+                <th>Time</th>
+                <th>Item</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+        {% for purchase in object_list %}
+        <tr>
+            <td>{{ purchase.purchase_timestamp|date:"D d M Y"}}</td>
+            <td>{{ purchase.purchase_timestamp|time:"H:i" }}</td>
+            <td>{{ purchase.menu_item_id.menu_item_name }}</td>
+            <td><a href="{% url 'purchase_update' purchase.id %}">Edit</a></td>
+            <td><a href="{% url 'purchase_delete' purchase.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>  
+    {% else %}
+            <p>No purchases have been logged.</p>
+        {% endif %}
+<a href="{% url 'purchase_create' %}" class ="add-btn">Add Purchase</a>
+</div>
+{% endblock %}

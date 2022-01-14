@@ -1,0 +1,41 @@
+{% extends "inventory_tracker/base.html" %}
+ 
+{% load static %}
+
+{% block head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;700&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" href="{% static 'inventory_tracker/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container body-container">
+    <h2>Inventory</h2>
+    {% if object_list %}
+    <table id ="menu-table">
+        <tr class="table-heading">
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Unit</th>
+            <th>Price per Unit</th>
+            <th> </th>
+            <th> </th>
+        </tr>
+            {% for ingredient in object_list %}
+            <tr>
+                <td>{{ ingredient.ingredient_name }}</td>
+                <td>{{ ingredient.ingredient_quantity }}</td>
+                <td>{{ ingredient.ingredient_unit }}</td>
+                <td>${{ ingredient.ingredient_price_per_unit }}</td>
+                <td><a href="{% url 'inventory_update' ingredient.id %}">Edit</a></td>
+                <td><a href="{% url 'inventory_delete' ingredient.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+    </table>
+    {% else %}
+            <p>There are no items in the menu.</p>
+        {% endif %}
+    <a href="{% url 'inventory_create' %}"class = "add-btn">Add to Inventory</a>
+</div>
+{% endblock %}
